@@ -18,10 +18,17 @@ class Artist
   end
 
   def self.all()
-      sql = "SELECT * FROM artists;"
-      result = SqlRunner.run(sql)
-      artists = result.map {|artist_hash| Artist.new(artist_hash)}
-      return artists
-    end
+    sql = "SELECT * FROM artists;"
+    result = SqlRunner.run(sql)
+    artists = result.map {|artist_hash| Artist.new(artist_hash)}
+    return artists
+  end
+
+  def albums()
+    sql = "SELECT * FROM albums WHERE artist_id = #{@id};"
+    result = SqlRunner.run(sql)
+    albums = result.map {|album_hash| Album.new(album_hash)}
+    return albums
+  end
 
 end
